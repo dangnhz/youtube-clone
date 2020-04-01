@@ -1,10 +1,8 @@
 const jwt = require('jsonwebtoken')
-const User = require('../models/User')
 const accessToken = require("../config/accessToken");
 
 function auth (req, res, next) {
     let token = req.header('x-auth-token')
-    console.log(token)
     if (!token) 
         return res.status(401).send({msg: 'No token, authorizaton denied'})
     try {

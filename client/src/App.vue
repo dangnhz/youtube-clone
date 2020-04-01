@@ -32,7 +32,6 @@ import Navbar from './components/Navbar'
            if (response) {
             //  console.log(response.data)
              this.$store.dispatch('login', response.data)
-              this.$store.dispatch('setToken', token)
            }
          } catch(err) {
            console.log(err)

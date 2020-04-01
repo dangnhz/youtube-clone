@@ -15,6 +15,7 @@ const PORT = process.env.PORT || 5000
 mongoose.connect(dbURI.mongoURI,{
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useCreateIndex: true
 })
 .then(() => console.log('database is conntected.'))
 .catch(err => console.log(err))
@@ -22,7 +23,7 @@ mongoose.connect(dbURI.mongoURI,{
 app.use('/api/auth', require('./routes/api/auth'))
 
 app.get('/', auth, (req, res) => {
-    res.json({msg:"hello world"})
+    res.status(200).json({msg:"hello fucking world"})
 })
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT} `))

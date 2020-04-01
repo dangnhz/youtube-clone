@@ -2,7 +2,7 @@
     <div id="register-success">
             <a-alert
             message="Success"
-            description="Your account has been created."
+            description="Your auth has been created."
             type="success"
             showIcon
     />

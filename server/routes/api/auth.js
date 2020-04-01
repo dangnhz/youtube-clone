@@ -32,13 +32,7 @@ router.post("/register",registerValidation, async (req, res) => {
 
     const saveUser = await newUser.save();
     if (!saveUser) throw Error("Something went wrong when saving the user");
-
-    const token = jwt.sign({ id: saveUser._id }, accessToken.secretKey, {
-      expiresIn: "30d"
-    });
-
     res.status(200).json({
-      token: token,
       user: {
         id: saveUser._id,
         name: saveUser.name,
@@ -64,7 +58,6 @@ router.post('/login',loginValidation, async (req, res) => {
     }
     try {
         const user = await User.findOne({ email }).select('+password') //make sure gott password from database
-        console.log(user)
          if (!user) throw Error('User does not exist')
          // compare password
          const isMatch = await bcrypt.compare(password, user.password);
@@ -93,7 +86,6 @@ router.post('/login',loginValidation, async (req, res) => {
 
 router.get('/user',auth, async (req, res) => {
     try {
-        console.log(req.userId)
         const user = await User.findById(req.user.id).select('-password');
         if (!user) throw Error('User does not exist');
         res.status(200).json({user: user})

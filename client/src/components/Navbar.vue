@@ -19,28 +19,28 @@
         <a-row type="flex" justify="end" align="middle">
           <router-link
           :to="{ name: 'register' }"
-          v-if="!this.$store.state.account.isAuthenticated"
+          v-if="!this.$store.state.auth.isAuthenticated"
           ><a-button class="btn" type="primary">Register</a-button></router-link
         >
         <router-link
           :to="{ name: 'login' }"
-          v-if="!this.$store.state.account.isAuthenticated"
+          v-if="!this.$store.state.auth.isAuthenticated"
           ><a-button class="btn" type="danger">Login</a-button></router-link
         >
         <a-button
-          v-if="this.$store.state.account.isAuthenticated"
+          v-if="this.$store.state.auth.isAuthenticated"
           type="danger"
           @click="handleLogout"
           >Logout</a-button
         >
         <a-avatar
-          v-if="this.$store.state.account.isAuthenticated && getCurrentUser"
+          v-if="this.$store.state.auth.isAuthenticated && getCurrentUser"
           class="btn"
           :src="getCurrentUser.image"
         />
         <span
           class="user-name"
-          v-if="this.$store.state.account.isAuthenticated && getCurrentUser"
+          v-if="this.$store.state.auth.isAuthenticated && getCurrentUser"
           v-text="getCurrentUser.name"
         ></span>
         </a-row>

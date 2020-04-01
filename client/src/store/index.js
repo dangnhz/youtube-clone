@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import account from './modules/account'
+import auth from './modules/auth'
 
 Vue.use(Vuex)
 
 const modules = {
-account
+auth
 }
 
 export default new Vuex.Store({

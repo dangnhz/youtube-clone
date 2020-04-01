@@ -1,8 +1,7 @@
 const state = {
     user:null,
     isAuthenticated: false,
-    accessToken:''
-
+    accessToken: window.localStorage.getItem('youtube_clone_token') || ''
 }
 
 const getters = {
@@ -21,7 +20,7 @@ const mutations = {
     setToken(state, token) {
         state.accessToken = token
     },
-    setAuthenticate(state) {
+    setAuthenticated(state) {
         state.isAuthenticated = !state.isAuthenticated
     }
 }
@@ -36,7 +35,7 @@ const actions = {
         if (data.token) {
             context.commit('setToken', data.token)
         }
-        context.commit('setAuthenticate')
+        context.commit('setAuthenticated')
     }
     ,
     logout (context) {

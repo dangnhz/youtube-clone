@@ -17,7 +17,7 @@ const routes = [
     name: 'register',
     component: () => import('../views/Register.vue'),
     beforeEnter: (to, from, next) => {
-      if (store.state.account.isAuthenticated) {
+      if (store.state.auth.isAuthenticated) {
         next({name:from.name})
       } else next()
     }
@@ -27,7 +27,7 @@ const routes = [
     name: 'login',
     component: () => import('../views/Login.vue'),
     beforeEnter: (to, from, next) => {
-      if (store.state.account.isAuthenticated) {
+      if (store.state.auth.isAuthenticated) {
         next({name:from.name})
       } else next()
     }
@@ -37,12 +37,12 @@ const routes = [
     name: 'register-success',
     component: () => import('../views/RegisterSuccess.vue'),
     beforeEnter: (to, from, next) => {
-      if (store.state.account.user && store.state.account.isAuthenticated) {
+      if (store.state.auth.user && store.state.auth.isAuthenticated) {
         next({name:"home"})
-      } if (!store.state.account.user) {
+      } if (!store.state.auth.user) {
         next({name:"home"})
       }
-      if (store.state.account.user && store.state.account.isAuthenticated){
+      if (store.state.auth.user && store.state.auth.isAuthenticated){
         next()
       }
       else next()
