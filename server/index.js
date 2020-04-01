@@ -21,7 +21,7 @@ mongoose.connect(dbURI.mongoURI,{
 
 app.use('/api/auth', require('./routes/api/auth'))
 
-app.get('/',auth, (req, res) => {
+app.get('/', auth, (req, res) => {
     res.json({msg:"hello world"})
 })
 

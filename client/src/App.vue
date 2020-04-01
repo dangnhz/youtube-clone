@@ -1,32 +1,65 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <Navbar></Navbar>
+    <router-view></router-view>
   </div>
 </template>
 
-<style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import {mapGetters} from 'vuex'
+import axios from 'axios'
+import Navbar from './components/Navbar'
+  export default {
+    name:'app',
+    components: {
+      Navbar,
+    },
+    computed: {
+      ...mapGetters(['getToken'])
+    },
+    methods: {
+      async loginByToken() {
+      const token = this.$store.getters.getToken
+      let config = {
+          headers: {
+            "Content-type": "application/json"
+          }
+        }
+         if (token) {
+              config.headers['x-auth-token'] = token;
+              try {
+           const response = await axios.get('http://localhost:5000/api/auth/user', config)
+           if (response) {
+            //  console.log(response.data)
+             this.$store.dispatch('login', response.data)
+              this.$store.dispatch('setToken', token)
+           }
+         } catch(err) {
+           console.log(err)
+        }
+         }      
+      },
+      setToken(){
+        const token = window.localStorage.getItem('youtube_clone_token')
+        if (token) {
+          this.$store.dispatch('setToken', token)
+        }
+    
+      }
+    },
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+    mounted () {
+      this.setToken()
+      this.loginByToken();
+      
+    },
   }
+</script>
+
+<style lang="less" >
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 </style>

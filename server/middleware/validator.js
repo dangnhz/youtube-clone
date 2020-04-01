@@ -15,7 +15,7 @@ function registerValidation (req, res, next) {
 
     })
     const {error} =  schema.validate(req.body)
-    if (error) return res.status(400).json({error: error.details[0].message})
+    if (error) return   res.status(400).send({error: error.details[0].message})
     next()
 }
 
@@ -31,7 +31,7 @@ function loginValidation (req, res, next) {
 
     })
     const { error } =  schema.validate(req.body)
-    if (error) return res.status(400).json({error: error.details[0].message})
+    if (error) return res.status(400).send({error: error.details[0].message})
     next()
 }
 

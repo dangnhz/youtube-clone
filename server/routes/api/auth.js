@@ -47,7 +47,7 @@ router.post("/register",registerValidation, async (req, res) => {
       }
     });
   } catch (e) {
-    res.status(400).json({ error: e.message });
+    res.status(400).send({ error: e.message });
   }
 });
 
@@ -87,7 +87,7 @@ router.post('/login',loginValidation, async (req, res) => {
             }
         })
     } catch (e) {
-        res.status(400).json({error: e.message})
+        res.status(400).send({error: e.message})
     }
 })
 
@@ -96,9 +96,9 @@ router.get('/user',auth, async (req, res) => {
         console.log(req.userId)
         const user = await User.findById(req.user.id).select('-password');
         if (!user) throw Error('User does not exist');
-        res.status(200).json(user)
+        res.status(200).json({user: user})
     } catch (e) {
-        res.status(400).json({msg: e.message})
+        res.status(400).send({msg: e.message})
     }
 })
 
