@@ -7,6 +7,7 @@
 
 <script>
 import {mapGetters} from 'vuex'
+import headerConfig from './store/headerConfig'
 import axios from 'axios'
 import Navbar from './components/Navbar'
   export default {
@@ -20,15 +21,9 @@ import Navbar from './components/Navbar'
     methods: {
       async loginByToken() {
       const token = this.$store.getters.getToken
-      let config = {
-          headers: {
-            "Content-type": "application/json"
-          }
-        }
          if (token) {
-              config.headers['x-auth-token'] = token;
               try {
-           const response = await axios.get('http://localhost:5000/api/auth/user', config)
+           const response = await axios.get('http://localhost:5000/api/auth/user', headerConfig(token))
            if (response) {
             //  console.log(response.data)
              this.$store.dispatch('login', response.data)

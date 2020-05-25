@@ -19,8 +19,9 @@ mongoose.connect(dbURI.mongoURI,{
 })
 .then(() => console.log('database is conntected.'))
 .catch(err => console.log(err))
-
+app.use('/uploads', express.static(__dirname +'/uploads'));
 app.use('/api/auth', require('./routes/api/auth'))
+app.use('/api/video', require('./routes/api/video'))
 
 app.get('/', auth, (req, res) => {
     res.status(200).json({msg:"hello fucking world"})

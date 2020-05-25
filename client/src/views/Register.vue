@@ -10,10 +10,10 @@
           <a-input v-model="name" placeholder="Please input your name" type="text" required ></a-input>
         </a-form-item>
         <a-form-item label="* Email">
-          <a-input  v-model="email" autocomplete="on" placeholder="Please enter your email" type="email" required ></a-input>
+          <a-input  v-model="email" autocomplete="off" placeholder="Please enter your email" type="email" required ></a-input>
         </a-form-item>
         <a-form-item label="* Password">
-          <a-input v-model="password" autocomplete="on" placeholder="Please enter your password" type="password" required ></a-input>
+          <a-input v-model="password" autocomplete="off" placeholder="Please enter your password" type="password" required ></a-input>
         </a-form-item>
         <a-form-item>
           <a-button type="primary" html-type="submit" :loading="isLoading">Register</a-button>

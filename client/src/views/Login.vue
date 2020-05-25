@@ -11,10 +11,10 @@
         <a-alert type="error" :message="error" banner />
       </div>
       <a-form @submit="handleSubmit">
-        <a-form-item label="* Email">
+        <a-form-item label="* Email"  >
           <a-input
             v-model="email"
-            autocomplete="on"
+            autocomplete="off"
             placeholder="Please enter your email"
             type="email"
             required
@@ -23,14 +23,15 @@
         <a-form-item label="* Password">
           <a-input
             v-model="password"
-            autocomplete="on"
+            autocomplete="off"
             placeholder="Please enter your password"
             type="password"
+            visibilityToggle="true"
             required
           ></a-input>
         </a-form-item>
         <a-form-item>
-          <a-button type="primary" html-type="submit" :loading="isLoading"
+          <a-button html-type="submit" :loading="isLoading"
             >Login</a-button
           >
         </a-form-item>
@@ -39,6 +40,7 @@
   </a-row>
 </template>
 <script>
+
 import axios from "axios";
 export default {
   name: "register",
@@ -74,7 +76,7 @@ export default {
         if (error.response) {
           this.isLoading = false;
           this.error = error.response.data.error;
-          console.log(error.response.data);
+          // console.log(error.response.data);
           setTimeout(() => {
             this.error = null;
           }, 5000);

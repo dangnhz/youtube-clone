@@ -47,7 +47,23 @@ const routes = [
       }
       else next()
     }
-  }
+  },
+  {
+    path: '/video/upload',
+    name: 'upload-video',
+    component: () => import('../views/UploadVideo.vue'),
+    beforeEnter: (to, from, next) => {
+      if (store.state.auth.user && store.state.auth.isAuthenticated) {
+        next()
+      } 
+      else next()
+    }
+  },
+  {
+    path: '/watch/:id',
+    name: 'watch',
+    component: () => import('../views/WatchVideo.vue'),
+  },
 
 ]
 

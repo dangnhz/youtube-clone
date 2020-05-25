@@ -39,9 +39,12 @@ const actions = {
     }
     ,
     logout (context) {
-        context.state.user = null;
-        context.state.isAuthenticated = false,
-        context.accessToken = ''
+        // context.state.user = null;
+        // context.state.isAuthenticated = false,
+        // context.state.accessToken = ''
+        context.commit('setUser', null)
+        context.commit('setToken', ''),
+        context.commit('setAuthenticated', false)
     },
     setToken(context, token) {
         context.commit('setToken', token)

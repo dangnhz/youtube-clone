@@ -2,6 +2,7 @@
 /server/node_modules
 /server/config/accessToken.js
 /server/config/key.js
+/server/uploads
 
 
 

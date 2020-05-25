@@ -5,7 +5,9 @@
         <a-col :span="4">
           <!-- <MainMenu></MainMenu> -->
         </a-col>
-        <a-col :span="20">{{msg}}</a-col>
+        <a-col :span="20">
+          <VideoListing :videos="videos"></VideoListing>
+        </a-col>
       </a-row>
     </div>
     
@@ -14,36 +16,29 @@
 
 <script>
 // import MainMenu from '../components/MainMenu'
+import VideoListing from '../components/VideoListing'
 import axios from 'axios'
   export default {
     name:'home',
     data() {
       return {
-        msg: ''
+        videos: []
       }
     },
     components: {
-      // MainMenu
+      VideoListing
     },
     methods: {
       async loadContent() {
-        const token = this.$store.getters.getToken
-        const config = {
-          headers: {
-            "Content-type" : "application/json"
-          }
-        }
-        config.headers['x-auth-token'] = token
-          if(token) {
              try {
-              const response = await axios.get('http://localhost:5000/', config)
+              const response = await axios.get('http://localhost:5000/api/video')
               if (response) {
-                this.msg = response.data.msg
+                this.videos = response.data.videos
               }
            } catch (err) {
              console.log(err)
            }
-          }
+          
       }
     },
     mounted () {
@@ -57,6 +52,6 @@ import axios from 'axios'
   position: relative;
   height: 100vh;
   width: 100%;
-  padding-top: 100px;
+  padding: 100px;
 }
 </style>

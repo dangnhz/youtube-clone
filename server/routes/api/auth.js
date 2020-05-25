@@ -24,6 +24,7 @@ router.post("/register",registerValidation, async (req, res) => {
 
     const hash = await bcrypt.hash(password, salt);
     if (!hash) throw Error("Something went wrong when hashing password");
+
     const newUser = User({
       name,
       email,
@@ -72,7 +73,7 @@ router.post('/login',loginValidation, async (req, res) => {
           res.status(200).json({
             token: token,
             user: {
-                id: user._id,
+                _id: user._id,
                 name: user.name,
                 email: user.email,
                 image: user.image,
